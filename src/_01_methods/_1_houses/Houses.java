@@ -4,44 +4,92 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 import org.jointheleague.graphical.robot.Robot;
+
 /*
  *    Copyright (c) The League of Amazing Programmers 2013-2021
  *    Level 1
  */
 public class Houses {
-		
+	Robot rob = new Robot("mini");
+	
 	public void run() {
-		Robot rob = new Robot("mini");
-		int size = 0;
-		rob.setX(300);
-		rob.setY(300);
+		//repeats ten times for the amount of houses
+		rob.setX(200);
+		rob.setY(200);
 		rob.penDown();
-		rob.setSpeed(20);
-		rob.setPenColor(0,0,0);
-		String houses = JOptionPane.showInputDialog("How many houses would you like to draw?");
-		int houseNum = Integer.parseInt(houses);
-		String select = JOptionPane.showInputDialog("What size would you like your houses to be?(Small,Medium,Large)");
-		if(select.equals("Small")) {
-			size = 10;
-		}
-		else if(select.equals("Medium")) {
-			size = 15;
-		}
-		else if(select.equals("Large")){
-			size = 20;
-		}
-		for(int n=0;n<houseNum;n++) {
-			rob.move(10);
-			for(int i=0;i<3;i++) {
-				rob.move(size);
-				rob.turn(90);
-				if(i%3==0) {
-					rob.turn(-180);
-				}
+		rob.setSpeed(50);
+		for(int i=0;i<10;i++) {
+			int size = JOptionPane.showOptionDialog(null, "What size do you want your house to be? ",  null, 0,
+					JOptionPane.INFORMATION_MESSAGE, null, new String[] { "Small", "Medium", "Large" }, null);
+			int color = JOptionPane.showOptionDialog(null, "What color do you want your house to be? ",  null, 0,
+					JOptionPane.INFORMATION_MESSAGE, null, new String[] { "Black", "Red", "Blue" }, null);
+			if(size==0&&color==0) {
+				rob.setPenColor(0,0,0);
+				drawSmallFlat();
+			}
+			else if(size==0&&color==1) {
+				rob.setPenColor(161, 26, 16);
+				drawSmallFlat();
+			}
+			else if(size==0&&color==2) {
+				rob.setPenColor(48, 123, 166);
+				drawSmallFlat();
+			}
+			else if(size==1&&color==0) {
+				rob.setPenColor(0,0,0);
+				drawMedFlat();
+			}
+			else if(size==1&&color==1) {
+				rob.setPenColor(161, 26, 16);
+				drawMedFlat();
+			}
+			else if(size==1&&color==2) {
+				rob.setPenColor(48, 123, 166);
+				drawMedFlat();
+			}
+			else if(size==2&&color==0) {
+				rob.setPenColor(0,0,0);
+				drawTallFlat();
+			}
+			else if(size==2&&color==1) {
+				rob.setPenColor(161, 26, 16);
+				drawTallFlat();
+			}
+			else if(size==2&&color==2) {
+				rob.setPenColor(48, 123, 166);
+				drawTallFlat();
 			}
 		}
 		
-		
-		// Check the recipe to find out what code to put here
 	}
+	public void drawTallFlat() {
+		rob.move(100);
+		rob.turn(90);
+		rob.move(20);
+		rob.turn(90);
+		rob.move(100);
+		rob.turn(-90);
+		rob.move(20);
+		rob.turn(-90);
 }
+	public void drawMedFlat() {
+		rob.move(75);
+		rob.turn(90);
+		rob.move(20);
+		rob.turn(90);
+		rob.move(75);
+		rob.turn(-90);
+		rob.move(20);
+		rob.turn(-90);
+	}
+	public void drawSmallFlat() {
+		rob.move(50);
+		rob.turn(90);
+		rob.move(20);
+		rob.turn(90);
+		rob.move(50);
+		rob.turn(-90);
+		rob.move(20);
+		rob.turn(-90);
+	}
+}	
